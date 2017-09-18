@@ -18,7 +18,7 @@ paginate: 8
 paginate_path: "page:num"
 gems: [jekyll-paginate]
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
-github_username: maoxiaoke
+github_username: xiude
 highlighter: rouge
 markdown: kramdown
 FB:
