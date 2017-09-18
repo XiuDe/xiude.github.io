@@ -66,12 +66,12 @@ abbr {text-decoration: none;}
 <li><a href="http://baconipsum.com/" target="_blank"><abbr title="提供文本填充器的网站">Bacon IPsum</abbr></a></li>
 <li><a href="https://placeholder.com/" target="_blank"><abbr title="提供占位符图片的网站">PLACEHOLDER.COM</abbr></a></li>
 <li><a href="https://dummyimage.com/" target="_blank"><abbr title="提供多类型占位符图片的网站">Dummy Image Generator</abbr></a></li>
-</ol>
+<!-- </ol>
 <hr><h4 class="btn btn-primary btn-lg">博客</h4><hr>
 <ol class="rounded-list">
 <li><a href="http://xiaokedada.com/" target="_blank">小可嗒嗒的博客</a></li>
 <li><a href="http://ghmagical.com/" target="_blank">TG的博客</a></li>
-</ol>
+</ol> -->
 <hr><h4 class="btn btn-info btn-lg">各大公司的前端站点</h4><hr>
 <ol class="rectangle-list">
 <li><a href="http://fex.baidu.com/" target="_blank">百度 FEX</a></li>
