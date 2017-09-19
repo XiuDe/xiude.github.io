@@ -1,6 +1,6 @@
 ---
 layout: original
-title: "Vuejs学习笔记第五章"
+title: "Jekyll安装总结"
 date: 2017-09-17 22:59:49 +0800 
 categories: Jekyll安装总结
 tag: jekyll
@@ -31,14 +31,20 @@ tag: jekyll
 > [ruby官网](https://rubyinstaller.org/downloads/)下载
 
 - 根据不同的机型选择不同的版本，为了稳妥起见建议和我安装的版本一样。由于要下载的东西挺多，一定要看好这里我们下载的是RubyInstalls下的版本。<br>
-![]('/styles/images/jekyll/download01.png')
+
+![](/styles/images/jekyll/download01.png)
+
 - 下载完成后安装在默认目录，__注意这里的默认目录会在第3.安装Devkit配置config.yml用到记录下来__，系统会自动帮你完成环境变量的配置。勾选如下选项安装。<br>
-![]('/styles/images/jekyll/install01.png')
+
+![](/styles/images/jekyll/install01.png)
+
 - 安装完成后再cmd中执行`ruby -v`，如果安装没有出错会出现安装的版本号。
 
 #### 3. 安装Devkit
 - 这次我们下载的是对应上面已安装的版本选择，这里下载的是Other Useful Downloads的7-ZIP ARCHIVES下的对应版本。以及DEVELOPMENT KIT下的版本。<br>
-![]('/styles/images/jekyll/download02.png')
+
+![](/styles/images/jekyll/download02.png)
+
 - 下载完成后运行DEVELOPMENT KIT解压至你的指定目录，如C:\DevKit
 - 通过初始化来创建 config.yml 文件。在命令行窗口内，输入下列命令：
 ```
