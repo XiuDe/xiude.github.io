@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "js高程3阅读笔记第六章"
+title: "js高程3第六章阅读笔记"
 date: 2017-09-24 11:36:20 +0800 
 categories: javascript面向对象
 tag: js高级程序设计3
