@@ -420,7 +420,6 @@ npm install webpack-dev-server html-webpack-plugin  --save-dev
 4. 此处我的package.json下的"devDependencies"为：
 "devDependencies": {
     "webpack": "^1.14.0",
-    "webpack": "^1.14.0",
     "css-loader": "^0.28.7",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",
