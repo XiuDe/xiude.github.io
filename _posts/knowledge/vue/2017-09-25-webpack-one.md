@@ -8,8 +8,11 @@ tag: webpack
 * content
 {:toc}
 
+[webpack中文文档](https://doc.webpack-china.org/)<br>
+[webpack github page](http://webpack.github.io/docs/)<br>
 
-总结webpack的安装以及webpack相应的命令。
+
+总结webpack的安装使用以及webpack打包各种常见文件相应的命令。
 
 
 
