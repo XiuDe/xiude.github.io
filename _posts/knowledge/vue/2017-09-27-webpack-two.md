@@ -13,7 +13,7 @@ tag: webpack 3.X
 
 
 补充webpack 3.x的webpack.config.js的相应配置。
-生成package.json的命令`npm init -y`.
+生成package.json的命令`npm init -y`。
 
 
 <!-- more -->
@@ -35,4 +35,5 @@ module:{
 }
 
 注意： use后loader的顺序。
+
 ```
