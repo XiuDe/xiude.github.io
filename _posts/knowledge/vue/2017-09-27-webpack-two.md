@@ -1,7 +1,7 @@
 ---
 layout: original
 title: "webpack 3.x补充"
-date: 2017-09-27 22:42:49 +0800 
+date: 2017-09-27 23:08:49 +0800 
 categories: 前端框架研究
 tag: webpack 3.X
 ---
@@ -17,7 +17,7 @@ tag: webpack 3.X
 
 
 <!-- more -->
-#### 1. 关于output
+#### 1. 关于output根路径的变更
 ```
 output:{
     path:path.resolve('__dirname',dist),
@@ -25,7 +25,7 @@ output:{
 }
 ```
 
-#### 2. 关于modules中loader书写问题
+#### 2. 关于modules中loader书写问题的变更
 ```
 module:{
     rules:[{
