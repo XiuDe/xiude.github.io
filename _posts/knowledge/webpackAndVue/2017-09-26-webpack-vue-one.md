@@ -303,3 +303,36 @@ new Vue({
 ![](/styles/images/vuewebpack/d5-2.png)
 
 - 4、执行 npm run dev
+
+#### 4. Vue移动组件mint-ui使用
+- Vue拥有很多的第三方开发的PC端或者移动端UI组件，
+    + 移动组件[mint-ui中文文档](http://mint-ui.github.io/#!/zh-cn)
+
+- 类似的移动端组件有
+    + 1.vux
+    + [vux关于升级到vue2.0](https://vux.li/?x-page=github_readme#/zh-CN/upgrade-to-2)
+    + [vux 组件使用文档](https://vux.li/?x-page=github_readme#/zh-CN/components)
+    + [vux 组件效果演示](https://vux.li/demos/v2/?x-page=v2-doc-home#/)
+    + [vux github](https://github.com/airyland/vux)
+    + 2.淘宝团队开发的：[SUI](http://m.sui.taobao.org/components/#toolbar)
+    + 3.[muse-ui](https://museui.github.io/#/gridList)
+
+- PC端组件
+    + 饿了么团队开发的：[element](http://element.eleme.io/#/zh-CN/component/installation)
+    + iView 是一套基于 Vue.js 的开源 UI 组件库，主要服务于 PC 界面的中后台产品, [iView2](https://www.talkingcoder.com/article/6395692494071220203)，全面支持 Vue.js 2.x。
+
+##### 4.1 mint-ui资源介绍
+- [官网](http://mint-ui.github.io/#!/zh-cn)
+- [文档](http://mint-ui.github.io/docs/#/zh-cn2)
+
+##### 4.2 安装mint-ui集成到项目中
+- 1、利用：npm install mint-ui --save 命令将mint-ui安装到项目中
+- 2、在main.js中全局导入mint-ui和它的css后即可在任何组件的`<template></template>`中使用mint-ui组件
+
+![d5-3.png](imgs/d5-3.png "")
+
+- 3、举例使用mint-ui的按钮组件：[可以参考文档](http://mint-ui.github.io/docs/#!/zh-cn2/button)
+
+![d5-4.png](imgs/d5-4.png "")
+
+- 4、mint-ui中css组件可以在入口文件中导入一次，整个项目都能使用，js组件使用时在当前的.vue页面的`<script></script>`中再次导入`import { Toast } from 'mint-ui';`
