@@ -25,7 +25,7 @@ output:{
 }
 ```
 
-#### 2. 关于modules中loader
+#### 2. 关于modules中loader书写问题
 ```
 module:{
     rules:[{
