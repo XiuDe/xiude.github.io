@@ -1,9 +1,9 @@
 ---
 layout: original
-title: "webpack 3.x补充"
+title: "webpack 3.x 语法补充"
 date: 2017-09-27 23:08:49 +0800 
 categories: 前端框架研究
-tag: webpack 3.X
+tag: webpack 3.x
 ---
 * content
 {:toc}
