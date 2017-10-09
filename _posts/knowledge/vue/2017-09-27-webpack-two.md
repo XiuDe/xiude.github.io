@@ -1,9 +1,9 @@
 ---
 layout: original
 title: "webpack 3.x 语法补充"
-date: 2017-09-27 23:08:49 +0800 
+date: 2017-10-09 23:08:49 +0800 
 categories: 前端框架研究
-tag: webpack 3.x
+tag: [webpack 3.x, webpack -p]
 ---
 * content
 {:toc}
@@ -36,4 +36,23 @@ module:{
 
 注意： use后loader的顺序。
 
+```
+
+#### 3. 关于将vue2.0项目打包成完整静态页面
+```
+在package.json中的"scripts"中添加"dist"
+"scripts": {
+    "dev": "webpack-dev-server --inline --hot --open --port 5008",
+    "dist": "webpack -p"
+  }
+
+  其中"dist"是webpack.config.js的module.exports中的output输出的指定文件夹名
+    path : __dirname+'/dist'
+
+  module.exports={
+  entry:'./src/main.js',  //指定打包的入口文件
+  output:{
+    path : __dirname+'/dist',  // 注意：webpack1.14.0 要求这个路径是一个绝对路径
+    filename:'build.js'
+  }
 ```
