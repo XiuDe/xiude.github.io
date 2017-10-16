@@ -1,13 +1,14 @@
 # Site settings
 name: 修德的博客
-email: 1287343381@qq.com
+email: webxiude@163.com
 author: X/D
 url: https://xiude.github.io
 resume_site: https://xiude.github.io/me/
 github: https://github.com/xiude/
 baseurl: ""  #根目录
 # description: 假如生活欺骗了你，不要悲伤，不要哭泣。
-description: 纵有疾风起，奋斗不可弃。
+# description: 纵有疾风起，奋斗不可弃。
+description: 半山
 motto: 纸上得来终觉浅，绝知此事要躬行。
 #motto: 如果生活欺骗了你，不要悲伤，不要哭泣。
 banner: 我想带你去看绚丽的山峦，去看秀丽的溪谷，这份心情，人类是如何称呼的呢。

@@ -9,6 +9,13 @@ tag: node
 {:toc}
 
 node实现动态网站及后台模板引擎的使用。
+- 接触到的node内容
+    + Node.js不需要依赖第三方应用软件（Apache），可以基于api自己实现
+    + 实现静态资源服务器
+    + 路由处理(多页面多分支)
+    + 动态网站
+    + 模板引擎(art-template)
+    + get和post参数传递和处理
 
 <!-- more -->
 
