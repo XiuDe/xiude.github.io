@@ -41,6 +41,7 @@ module:{
 #### 3. 关于将vue2.0项目打包成完整静态页面
 ```
 在package.json中的"scripts"中添加"dist"
+然后执行npm run dist生成打包后的静态页面
 "scripts": {
     "dev": "webpack-dev-server --inline --hot --open --port 5008",
     "dist": "webpack -p"
