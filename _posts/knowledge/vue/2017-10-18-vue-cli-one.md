@@ -8,6 +8,6 @@ tag: vue
 * content
 {:toc}
 
--[vue-cli](https://github.com/vuejs/vue-cli)
+- [vue-cli](https://github.com/vuejs/vue-cli)
 
 <!-- more -->
