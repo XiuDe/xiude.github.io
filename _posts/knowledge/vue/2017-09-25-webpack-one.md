@@ -85,7 +85,8 @@ module.exports={
 ```
       webpack 入口文件.js 输出文件.js
       webpack         // 最基本的启动webpack的方法，默认查找名称为 webpack.config.js文件
-      webpack --config webpack.config.js    // 指定配置文件    
+      webpack --config webpack.config.js    // 指定配置文件文件名可修改
+      // webpack --config webpack.develop.config.js    
       
       webpack -p      // 对打包后的文件进行压缩
       webpack -d      // 提供source map，方便调式代码
