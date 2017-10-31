@@ -7,8 +7,7 @@ tag: webpack
 ---
 * content
 {:toc}
-
-webpack相较于[gulp](http://www.gulpjs.com.cn/docs/getting-started/)打包vue或react更常用，但是webpack的版本更新有很多组件会报错，这里总结以下webpack3.8.1和webpack-dev-server2.9.3的相关问题。以及简单的webpack流程安装总结，详细部分以前文章总结过。
+webpack将代码打包成适合浏览器运行的格式。webpack相较于[gulp](http://www.gulpjs.com.cn/docs/getting-started/)打包vue或react更常用，但是webpack的版本更新有很多组件会报错，这里总结以下webpack3.8.1和webpack-dev-server2.9.3的相关问题。以及简单的webpack流程安装总结，详细部分以前文章总结过。
 
 - [英文官网](http://webpack.github.io/docs/)
 - [Webpack-handlebook](http://zhaoda.net/webpack-handbook/)
@@ -76,3 +75,118 @@ module.exports = {
 
 #### 5.webpack构建的项目目录
 ![](/styles/images/webpack/webpack01.png)
+
+
+### 2. webpack加载器loaders
+> webpack3.8.1和babel-loader7.1.2
+
+#### 1.loaders加载器
+> 将react的jsx、ES6或SCSS等转换成原生js和css
+
+- webpack3.8.1下babel-loader7.1.2下调试运行
+- webpack2和3部分兼容webpack1语法
+
+#### 2.babel-loader安装
+- 当前项目下`npm install babel-loader --save-dev`
+- `npm install babel-core babel-preset-es2015 babel-preset-react --save-dev`
+    + `babel-preset-es2015`转换es6为原生js
+    + `babel-preset-react`转换jsx为原生js
+
+#### 3.相关文件配置
+- webpack.develop.config.js
+
+```
+/**
+ * webpack 开发阶段配置文件
+ * */
+var path = require('path');
+var webpack = require("webpack");
+
+module.exports = {
+    entry:path.resolve(__dirname,'src/js/app.js'),
+    output:{
+        path: path.resolve(__dirname,'dist'),
+        filename: 'bundle.js',
+    },
+    devServer:{
+        contentBase: "./dist", // 当前文件夹下的index文件
+        historyApiFallback:true,
+        inline:true,
+        hot:true,
+    },
+    module:{
+        rules:[ //配置loader，rules或是loaders，这里使用loaders也不会报错
+            {
+            test:/\.jsx?$/,
+                loader:"babel-loader",
+                options: {
+                    // npm install babel-core babel-preset-es2015 babel-preset-react --save-dev
+                    // 安装的加载器部分对应
+                    presets: ['es2015', 'react'] 
+
+                }
+        }
+        ]
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+        // hot这个属性已经没有用了，使用热模块的话我们需要用到一个叫webpack.HotModuleReplacementPlugin的插件。
+        // 需要加载 webpack进来
+    ]
+}
+
+
+```
+
+- package.js文件
+
+```
+{
+  "name": "webpack_example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "webpack-dev-server --inline --config webpack.develop.config.js  --devtool eval --progress --colors",
+    "publish": "webpack --config webpack.publish.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.3"
+  },
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
+}
+
+```
+
+- 入口文件app.js
+
+```
+import React,{Component} from 'react'
+import ReactDom from 'react-dom'
+
+ReactDom.render(
+    <div>react中的jsx通过loader打包编译</div>,
+     document.getElementById('app')
+)
+```
+
+#### 4.参考文档
+- [webpack3版本配置一](http://blog.csdn.net/qq_20334295/article/details/74166356?locationNum=1&fps=1)
+- [webpack3版本配置二](http://blog.csdn.net/qq_20334295/article/details/74933034)
+- [webpack3配置webpack-dev-server](http://www.cnblogs.com/caideyipi/articles/7080010.html)
+
+### 3. webpack加载器loaders应用
+#### 1.加载css
+- 当前目录下安装`install css-loader style-loader --save-dev`
+- 需要安装node-sass否则会报错`npm install node-sass --save-dev`
