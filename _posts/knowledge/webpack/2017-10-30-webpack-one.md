@@ -12,7 +12,7 @@ webpack将代码打包成适合浏览器运行的格式。webpack相较于[gulp]
 - [英文官网](http://webpack.github.io/docs/)
 - [Webpack-handlebook](http://zhaoda.net/webpack-handbook/)
 - [Gitbook](http://fakefish.github.io/react-webpack-cookbook/index.html)
-- 关于博客的手机
+- 关于博客收集
     + [详解前端模块化工具-Webpack](https://segmentfault.com/a/1190000003970448)
     + [阮一峰webpack](https://github.com/ruanyf/webpack-demos)
     + [Webpack 入门指迷](https://segmentfault.com/a/1190000002551952)
@@ -187,6 +187,111 @@ ReactDom.render(
 - [webpack3配置webpack-dev-server](http://www.cnblogs.com/caideyipi/articles/7080010.html)
 
 ### 3. webpack加载器loaders应用
-#### 1.加载css
+#### 1.加载css和scss
 - 当前目录下安装`install css-loader style-loader --save-dev`
-- 需要安装node-sass否则会报错`npm install node-sass --save-dev`
+- 需要提前安装node-sass否则会报错`npm install node-sass --save-dev`
+
+> webpack.develop.config.js
+
+```
+// rules下
+{
+    test:/\.scss$/,  
+    use:['style-loader','css-loader','sass-loader'] //webpack 2+写法
+}
+```
+
+#### 2.url加载器-处理图片
+- 该项目下安装`npm install url-loader -save-dev`。
+- webpack3.8.1不报错，如果报错`npm install file-loader --save-dev`。
+
+```
+{
+    test:/\.(png|jpg|jpeg|gif)$/,
+    use:'url-loader?limt-25000' // 小于3kb内联在网页中，大于3kb请求
+}
+```
+
+#### 3.url加载器-处理字体
+
+
+```
+{
+    test:/\.(eot|woff|ttf|woff2|svg)$/,
+    use:'url-loader?limt-25000' // 小于3kb内联在网页中，大于3kb请求
+}
+```
+
+### 3. webpack发布
+#### 1.将完成的项目构建
+- 运行package.json的publish`npm run 名`。
+    + `npm run publish`。
+
+#### 2.分离第三方包
+- `npm run publish`生成的bundle.js文件过大，不好维护，分离第三方包
+- 1.修改publish的配置文件将入口文件修改
+
+```
+entry:{
+    app:path.resolve(__dirname,'src/js/app.js'),
+    vendors:['react','react-dom'] // 存储第三方包名
+}
+```
+
+- 2.添加插件
+
+```
+plugins: [
+    // 帮助进行热重载的
+    new webpack.HotModuleReplacementPlugin(),
+    // 分离第三方包的插件 name后接entry的分离名，filename接分离后的js名
+     new webpack.optimize.CommonsChunkPlugin({name:'vendors',filename:'vendors.js'})
+]
+```
+
+- 3.在index.js中引入vendors.js，如果想要压缩代码，在package.json的publish中加入`-p`，如`"publish": "webpack --config webpack.publish.config.js -p"`，不加代码就不压缩。
+- 4.重新构建
+
+### 4. webpack的常用插件
+> 加载器是项目构建之前做预处理操作，插件是项目构建之后做后处理工作(压缩，合并，混淆等)
+
+- 内置插件
+- 第三方插件
+
+#### 1.删除文件夹的插件
+- `npm install clean-webpack-plugin -save-dev`。
+- 在webpack配置文件下引入插件`var CleanPlugin = require('clean-webpack-plugin')`，然后plugins下`new CleanPlugin(['dist'])`，dist为删除的目录文件。
+
+#### 2.自动生成html页面插件
+- `npm install html-webpack-plugin -save-dev`。
+- webpack发布阶段的配置文件`var HtmlWebpackPlugin = require("html-webpack-plugin");`。
+
+```
+new HtmlWebpackPlugin({
+    template:'./src/template.html',
+    htmlWebpackPlugin:{
+        "file":{
+        //    "css":["app.css"],
+            "js":["vendors.js","bundle.js"]
+        }
+        },
+        minify:{ // 压缩
+            removeComments:true, // 删除评论
+            collapseWhitespace:true, // 压缩空格
+            removeAttributeQuotes:true //
+        }
+})
+```
+- 运行`npm run publish`。
+
+#### 3.压缩代码优化插件 - 内置插件
+- 在webpack配置文件plugins下直接配置
+
+```
+ new webpack.optimize.UglifyJsPlugin({
+    compress:{
+        warings:false
+    }
+})
+```
+- 运行`npm run publish`查看效果。
