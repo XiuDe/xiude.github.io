@@ -1,7 +1,7 @@
 ---
 layout: original
 title: "webpack版本总结"
-date: 2017-10-30 21:22:49 +0800 
+date: 2017-11-1 10:29:49 +0800 
 categories: 前端框架研究
 tag: webpack
 ---
@@ -295,3 +295,74 @@ new HtmlWebpackPlugin({
 })
 ```
 - 运行`npm run publish`查看效果。
+
+#### 4.自动抽取css文件的插件
+- `npm install extract-text-webpack-plugin -save-dev`。
+- 在webpack配置文件下引入插件`var ExtractTextPlugin = require("extract-text-webpack-plugin")`
+- 修改css的loader
+
+```
+{
+    test:/\.css$/,
+    use:ExtractTextPlugin.extract({     // 插件抽取css
+        fallback:"style-loader",
+        use: ['css-loader']
+    })
+}
+```
+- 然后添加插件
+
+```
+new ExtractTextPlugin({
+    filename:"app.css",
+    allChunks:true
+}) // 抽取的css文件名称
+```
+
+- 出了很多错，参考[github](https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/569)
+- 基于抽取css基础上抽取scss文件，将scss语法抽取到css中，修改loader即可
+
+```
+{
+    test:/\.scss$/,
+    use:ExtractTextPlugin.extract({     // 插件抽取scss
+      fallback:"style-loader",
+      use:['css-loader','sass-loader']
+    })
+
+}
+```
+
+#### 5.压缩代码优化插件再优化 - 内置插件
+
+```
+// 在构建过程中删除警告
+new webpack.DefinePlugin({
+    'process.env':{
+       NODE_ENV:'"production"'
+    }
+})
+```
+- `npm run publish`将运行的dist文件直接发布。
+
+> 以上插件是部署阶段webpack.publish.config.js常用插件。部署阶段的插件该删的删，
+> 热重载、devServer
+
+#### 6.打开浏览器用对的插件
+> 开发阶段插件，webpack.develop.config.js。
+
+- 安装`npm install open-browser-webpack-plugin -save-dev`。
+- 引入`var OpenBrowserPlugin = require("open-browser-webpack-plugin");`。
+- 插件中写入` new OpenBrowserPlugin({ url:'http://localhost:8080/ ',browser:'chrome'})`。
+- 运行，会在chrome自动打开指定路径。
+
+
+### 5. webpack配置文件的属性
+#### 1.resolve属性
+
+```
+// 在入口文件引入文件时可以省略后缀，这个属性一般不用，因为和热重载冲突
+resolve:{
+    extensions:['','.js','.json','.scss','jsx']
+}
+```
