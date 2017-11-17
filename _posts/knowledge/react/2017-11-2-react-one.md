@@ -64,7 +64,7 @@ tag: react
 - React 会将所有要显示到 DOM 的字符串转义，防止 XSS。所以如果 JSX 中含有转义后的实体字符比如 `&copy; (©)`最后显示到 DOM 中不会正确显示，因为 React 自动把 `&copy;` 中的特殊字符转义了。
     + 直接使用 UTF-8 字符 ©
     + 使用对应字符的 Unicode 编码
-    + 使用数组组装 <div>{['cc ', <span>&copy;</span>, ' 2015']}</div>
+    + 使用数组组装 `<div>{['cc ', <span>&copy;</span>, ' 2015']}</div>`
     + 直接插入原始的 HTML
     
     ```
@@ -126,3 +126,42 @@ var content = (
 );
 
 ```
+
+### 5. react的API
+#### 1. 顶层API
+- [顶层API](http://facebook.github.io/react/docs/top-level-api.html)
+
+#### 2. 组件API
+- [组件API](http://facebook.github.io/react/docs/component-api.html)
+
+### 6. 组件的生命周期
+- [gitbooks生命周期](https://hulufei.gitbooks.io/react-tutorial/content/index.html)
+
+#### 1. 组件生命周期的三个状态
+- Mounting：已插入真实DOM
+- Updating：正在被重新渲染
+- Unmounting：已移出真实DOM
+
+#### 2. 处理函数
+> React 为每个状态都提供了两种处理函数，will函数在进入状态之前调用，did 函数在进入状态之后调用，三种状态共计五种处理函数。
+
+- componentWillMount()：组件将要被渲染到真实Dom节点
+- componentDidMount()：组件已经被渲染到真实Dom节点
+- componentWillUpdate(object nextProps, object nextState)：组件将要被重新渲染
+- componentDidUpdate(object prevProps, object prevState)：组件已经被重新渲染
+- componentWillUnmount()：组件将要被卸载方法
+
+> 此外，React 还提供两种特殊状态的处理函数
+
+- componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+- shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+
+#### 3. 函数的调用顺序
+
+![]({{'/styles/images/react/react01.png'}})
+
+- [react生命周期参考博客](http://pinggod.com/2015/React-%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/)
+
+### 7. react 的 ES5 与 ES6 写法对照
+- [React](http://www.tuicool.com/articles/equ2my)
+- [ReactNative](http://bbs.reactnative.cn/topic/15/react-react-native-%E7%9A%84es5-es6%E5%86%99%E6%B3%95%E5%AF%B9%E7%85%A7%E8%A1%A8/2)
