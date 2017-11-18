@@ -165,3 +165,17 @@ var content = (
 ### 7. react 的 ES5 与 ES6 写法对照
 - [React](http://www.tuicool.com/articles/equ2my)
 - [ReactNative](http://bbs.reactnative.cn/topic/15/react-react-native-%E7%9A%84es5-es6%E5%86%99%E6%B3%95%E5%AF%B9%E7%85%A7%E8%A1%A8/2)
+
+### 8. react 事件处理
+#### 1. 事件使用
+- onClick这种进行驼峰命名ES5和ES6的写法不一样，在ES6中要用bind方法绑定this(具体可参照ES5和ES6写法对照表)
+
+#### 2. 参数传递
+- ES6写法：给事件处理函数传递额外参数的方式：`bind(this, arg1, arg2, ...)`
+- `<p onClick={this.handleClick.bind(this, param1,param2,param3)}>`
+
+#### 3. React支持的事件列表
+- [英文文档](https://reactjs.org/docs/events.html)
+- [中文文档](https://doc.react-china.org/docs/events.html)
+
+### 9. react 的 Dom 操作
