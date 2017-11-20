@@ -179,3 +179,39 @@ var content = (
 - [中文文档](https://doc.react-china.org/docs/events.html)
 
 ### 9. react 的 Dom 操作
+#### 1. 组件的Dom事件监听
+- 监听事件(包括ajax请求等)要放到`componentDidMount`方法及以后，目的是等dom渲染结束后继续做操作
+- 组件卸载时一定要移除监听事件
+
+#### 2. 参数传递的判断
+> 属性校验
+
+- [PropTypes的改变](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes)
+- [PropTypes的改变](https://doc.react-china.org/docs/typechecking-with-proptypes.html)
+
+
+### 10. react 的受控表单组件
+- [react表单](https://doc.react-china.org/docs/forms.html)
+- [react Forms](https://reactjs.org/docs/forms.html)
+
+#### 1. 受控表单组件
+> react里只要表单的`状态属性`与state进行绑定了，那么这些表单组件，就是受控表单组件。
+
+- 受控表单组件与react单项数据流的思想有关：页面中所有的UI和行为都应该为`state`所控制。而表单中控制UI和行为的属性就是状态属性。
+- 受控表单属性的特点：如果想改变它的值，一定得通过onChange事件改变
+
+#### 2. 状态属性
+> 表单元素中属于状态的属性。
+
+- `value`，对应`<input>`和`<textarea`的所有
+- `checked`，对应`checkbox`和`radio`的`<input>`所有
+- `selected`，对应`<option>`所有
+
+### 11. react 的组合组件
+- [react composition](https://reactjs.org/docs/composition-vs-inheritance.html)
+- [react 组合组件](https://doc.react-china.org/docs/composition-vs-inheritance.html)
+- key(+ diff算法)提高渲染效率问题：只会渲染变化的dom元素，未发生改变不会渲染。
+
+### 12. Context
+- [react context](https://reactjs.org/docs/context.html)
+- [react 不建议使用context](https://doc.react-china.org/docs/context.html)
