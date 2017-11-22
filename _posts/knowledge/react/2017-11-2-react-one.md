@@ -215,3 +215,18 @@ var content = (
 ### 12. Context
 - [react context](https://reactjs.org/docs/context.html)
 - [react 不建议使用context](https://doc.react-china.org/docs/context.html)
+
+### 13. 动画
+- [动画](https://doc.react-china.org/docs/animation.html)
+- [React 源码剖析系列 － 玩转 React Transition](https://zhuanlan.zhihu.com/p/20419592)
+- [csdn react文章](http://blog.csdn.net/lihongxun945/article/details/46778723)
+
+### 14. react常用插件
+- [https://js.coach/react/react-infinite](https://js.coach/react/react-infinite)
+- [https://react.parts/native](https://react.parts/native)
+
+### 15. react的diff算法
+- [协调（Reconciliation）](https://doc.react-china.org/docs/reconciliation.html)
+- [react的精髓Virtual Dom](http://blog.csdn.net/lihongxun945/article/details/46640503)
+- [diff算法一](http://blog.csdn.net/yczz/article/details/49585283)
+- [React源码解析diff算法](http://blog.csdn.net/yczz/article/details/49886061)
