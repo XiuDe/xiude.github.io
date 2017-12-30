@@ -128,6 +128,7 @@ To run your app on Android:
  
     + 用检测设备的方式`adb devices`查看安卓usb链接pc，链接成功
     + 执行`react-native run-android`命令
+    + local.properties会报错`C:\Users\user\AppData\Local\Android\android-sdk\extras\google\webdriver\TestAnAndroidWebApp`暂时没找到好的办法。
 
 #### 9.混合app和react native都可用
 
