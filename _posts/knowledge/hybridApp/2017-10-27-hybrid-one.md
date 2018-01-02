@@ -108,7 +108,9 @@ tag: hybird
 - 系统变量path中输入`%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools`。
 - 命令串口输入`adb`检测。
 
-#### 8. [Yarn、React Native的命令行工具（react-native-cli）](https://reactnative.cn/docs/0.51/getting-started.html)
+#### 8. Yarn、React Native的命令行工具
+
+-[Yarn、React Native的命令行工具（react-native-cli）](https://reactnative.cn/docs/0.51/getting-started.html)
 
 - PowerShell运行`react-native init 项目名`初始化RN项目，默认使用yarn装包
     + 安装完成后有两种方式
