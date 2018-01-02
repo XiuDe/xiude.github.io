@@ -1,7 +1,7 @@
 ---
 layout: original
 title: "webpack版本总结"
-date: 2017-11-1 10:29:49 +0800 
+date: 2018-01-02 22:03:49 +0800 
 categories: 前端框架研究
 tag: webpack
 ---
@@ -182,12 +182,14 @@ ReactDom.render(
 ```
 
 #### 4.参考文档
+
 - [webpack3版本配置一](http://blog.csdn.net/qq_20334295/article/details/74166356?locationNum=1&fps=1)
 - [webpack3版本配置二](http://blog.csdn.net/qq_20334295/article/details/74933034)
 - [webpack3配置webpack-dev-server](http://www.cnblogs.com/caideyipi/articles/7080010.html)
 
 ### 3. webpack加载器loaders应用
 #### 1.加载css和scss
+
 - 当前目录下安装`install css-loader style-loader --save-dev`
 - 需要提前安装node-sass否则会报错`npm install node-sass --save-dev`
 
@@ -202,6 +204,7 @@ ReactDom.render(
 ```
 
 #### 2.url加载器-处理图片
+
 - 该项目下安装`npm install url-loader -save-dev`。
 - webpack3.8.1不报错，如果报错`npm install file-loader --save-dev`。
 
@@ -285,6 +288,7 @@ new HtmlWebpackPlugin({
 - 运行`npm run publish`。
 
 #### 3.压缩代码优化插件 - 内置插件
+
 - 在webpack配置文件plugins下直接配置
 
 ```
@@ -297,6 +301,8 @@ new HtmlWebpackPlugin({
 - 运行`npm run publish`查看效果。
 
 #### 4.自动抽取css文件的插件
+
+- [github文档](https://github.com/webpack-contrib/extract-text-webpack-plugin)
 - `npm install extract-text-webpack-plugin -save-dev`。
 - 在webpack配置文件下引入插件`var ExtractTextPlugin = require("extract-text-webpack-plugin")`
 - 修改css的loader
@@ -337,18 +343,36 @@ new ExtractTextPlugin({
 
 ```
 // 在构建过程中删除警告
-new webpack.DefinePlugin({
+new webpack.optimize.DefinePlugin({
     'process.env':{
        NODE_ENV:'"production"'
     }
 })
 ```
+
 - `npm run publish`将运行的dist文件直接发布。
 
 > 以上插件是部署阶段webpack.publish.config.js常用插件。部署阶段的插件该删的删，
 > 热重载、devServer
 
-#### 6.打开浏览器用对的插件
+#### 6.压缩css代码
+
+- [github文档](https://github.com/NMFR/optimize-css-assets-webpack-plugin)
+
+1. 运行`cnpm i optimize-css-assets-webpack-plugin --save-dev`安装插件到开发依赖。
+2. 在配置文件头部导入插件：
+
+```
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+```
+3. 在plugins节点下新增插件：
+
+```
+ new OptimizeCssAssetsPlugin() // 压缩CSS文件的插件
+```
+
+
+#### 7.打开浏览器用对的插件
 > 开发阶段插件，webpack.develop.config.js。
 
 - 安装`npm install open-browser-webpack-plugin -save-dev`。
@@ -366,3 +390,7 @@ resolve:{
     extensions:['','.js','.json','.scss','jsx']
 }
 ```
+
+### 6. 其它优化插件
+
+- [github其它优化插件](https://github.com/kangax/html-minifier#options-quick-reference)
