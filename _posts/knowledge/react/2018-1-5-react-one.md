@@ -1,14 +1,14 @@
 ---
 layout: original
 title: "react相关整理一"
-date: 2017-11-14 24:23:49 +0800 
+date: 2018-01-05 22:23:49 +0800 
 categories: 前端框架研究
 tag: react
 ---
 * content
 {:toc}
 
-关于基本的react的相关整理，版本更新太快英文文档比较好。
+关于基本的react的相关整理，主要是基本概念的概括。
 
 - [英文网官网](http://facebook.github.io/react/docs/getting-started.html)
 - [中文文档](http://www.react-cn.com/docs/getting-started.html)
@@ -25,6 +25,9 @@ tag: react
 > react四个核心内容虚拟DOM、React组件、Jsx语法和Data Flow。
 
 #### 1. Virtual DOM
+
+- 虚拟DOM的本质：使用js对象模拟DOM树
+- 虚拟DOM的目的：实现DOM节点的高效更新
 - 虚拟DOM的优势
     + 性能优势：web应用不同于网站，web应用会在单页面中有大量的DOM操作，大量的DOM操作很慢。React中，应用程序在虚拟DOM上操作，React可以优化。即：React在每次需要渲染时，会先比较当前DOM内容和待渲染内容的差异，然后再决定如何最优的更新DOM(reconciliation过程)。
     + 提供了一种一致的开发方式来开发服务端应用、Web应用和手机端应用：有了虚拟DOM层，通过配备不同的渲染器，就可以将虚拟DOM的内容渲染到不同的平台。
@@ -32,6 +35,12 @@ tag: react
 - Virtual DOM速度快的原因
     + React为此引入了虚拟DOM（Virtual DOM）的机制：在浏览器端用Javascript实现了一套DOM API。基于React进行开发时所有的DOM构造都是通过虚拟DOM进行，每当数据变化时，React都会重新构建整个DOM树，然后React将当前 整个DOM树和上一次的DOM树进行对比，得到DOM结构的区别，然后仅仅将需要变化的部分进行实际的浏览器DOM更新。
     + [原文链接](http://blog.csdn.net/yczz/article/details/49585313)
+
+##### 1. 虚拟DOM树中的diff算法
+ - tree diff:新旧DOM树，逐层对比的方式，就叫做 tree diff,每当我们从前到后，把所有层的节点对比完后，必然能够找到那些 需要被更新的元素；
+ - component diff：在对比每一层的时候，组件之间的对比，叫做 component diff;当对比组件的时候，如果两个组件的类型相同，则暂时认为这个组件不需要被更新，如果组件的类型不同，则立即将旧组件移除，新建一个组件，替换到被移除的位置；
+ - element diff:在组件中，每个元素之间也要进行对比，那么，元素级别的对比，叫做 element diff；
+ - key：key这个属性，可以把 页面上的 DOM节点 和 虚拟DOM中的对象，做一层关联关系；
 
 #### 2. React组件
 - 组件：即封装起来的具有独立功能的UI部件。MVC的思想做到视图-数据-控制器的分离，那么组件化的思考方式则是带来了UI功能模块之间的分离。
