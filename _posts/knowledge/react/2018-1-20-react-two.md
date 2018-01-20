@@ -1,7 +1,7 @@
 ---
 layout: original
 title: "react学习笔记"
-date: 2018-01-06 23:23:49 +0800 
+date: 2018-01-20 22:23:49 +0800 
 categories: 前端框架研究
 tag: react
 ---
@@ -19,7 +19,7 @@ tag: react
 1. 搭建项目目录，配置好webpack文件。
 
 ### 2. 开始编写React项目
-1. react项目最先安装`react`和`react-dom`两个包
+1. react项目js中最先安装`react`和`react-dom`两个包，html写父容器标签
     - `cnpm i react react-dom -S`。
     - `react`专门创建React组件、组件生命周期等。
     - `react-dom`里面主要封装和DOM操作相关的包。
@@ -81,3 +81,63 @@ tag: react
    {/* 1234 */}
  </div>
 ```
+
+### 4. React中创建组件的第一种方式
+#### 1. 通过函数创建组件
+1. 在React中，构造函数是一个最基本的组件，如果想要把组件放到页面中，可以把 构造函数的名称，当作组件的名称，以HTML标签形式引入页面中
+
+```
+注意：React在解析所有的标签的时候，是以标签的首字母来区分的，如果标签的首字母是小写，那么就按照普通的HTML标签来解析，如果首字母是大写，则按照组件的形式去解析渲染
+
+结论：组件的首字母必须是大写
+
+ function Hello() {
+   return <div>
+     <h1>这是在Hello组件中定义的元素</h1>
+   </div>
+ }
+
+ ReactDOM.render(<div>
+  <Hello></Hello>
+</div>, document.getElementById('app'))
+```
+#### 2. 父组件向子组件传递数据
+1. (值少的情况)向子组件内传参
+
+```
+var name = "xd";
+var age = 1;
+
+function Hello(){
+  return <div>
+    <h1>这是在Hello组件中定义的元素，姓名为{name}，年龄是{age}</h1>
+  <div>
+}
+
+ReactDom.render(<div>
+       <Hello name={name} age={age}></Hello>
+    </div>,document.getElementById("app"));
+```
+2. (值多的情况)如果想要使用外部传递过来的数据，必须显示的在构造函数参数列表中，定义 props 属性(自定义的其他名不影响)来接收
+
+```
+var person = {
+    name:"xd",
+    age:2,
+    gender:"男",
+    address:"earth"
+}
+
+function Hello(props){
+    return <div>
+       <h1>向Hello组件中传多个值，姓名为{props.name}，地址为{props.address}<h1>
+    </div>
+}
+
+ReactDom.render(<div>
+      <Hello {...person}></Hello>
+    </div>,document.getElementById("app"));
+```
+3. 通过 props 得到的任何数据都是只读的，函数组件内不能重新赋值
+
+
