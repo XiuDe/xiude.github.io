@@ -118,6 +118,7 @@ ReactDom.render(<div>
        <Hello name={name} age={age}></Hello>
     </div>,document.getElementById("app"));
 ```
+
 2. (值多的情况)如果想要使用外部传递过来的数据，必须显示的在构造函数参数列表中，定义 props 属性(自定义的其他名不影响)来接收
 
 ```
@@ -138,6 +139,7 @@ ReactDom.render(<div>
       <Hello {...person}></Hello>
     </div>,document.getElementById("app"));
 ```
+
 3. 通过 props 得到的任何数据都是只读的，函数组件内不能重新赋值
 
 
