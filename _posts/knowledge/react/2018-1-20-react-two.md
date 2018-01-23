@@ -82,7 +82,7 @@ tag: react
  </div>
 ```
 
-### 4. React中创建组件的第一种方式
+### 4. React中创建组件的第一种方式 (函数)
 #### 1. 通过函数创建组件
 1. 在React中，构造函数是一个最基本的组件，如果想要把组件放到页面中，可以把 构造函数的名称，当作组件的名称，以HTML标签形式引入页面中
 
@@ -102,7 +102,7 @@ tag: react
 </div>, document.getElementById('app'))
 ```
 #### 2. 父组件向子组件传递数据
-1. (值少的情况)向子组件内传参
+1.  (值少的情况)向子组件内传参
 
 ```
 var name = "xd";
@@ -119,7 +119,7 @@ ReactDom.render(<div>
     </div>,document.getElementById("app"));
 ```
 
-2. (值多的情况)如果想要使用外部传递过来的数据，必须显示的在构造函数参数列表中，定义 props 属性(自定义的其他名不影响)来接收
+2.  (值多的情况)如果想要使用外部传递过来的数据，必须显示的在构造函数参数列表中，定义 props 属性(自定义的其他名不影响)来接收
 
 ```
 var person = {
@@ -140,6 +140,84 @@ ReactDom.render(<div>
     </div>,document.getElementById("app"));
 ```
 
-3. 通过 props 得到的任何数据都是只读的，函数组件内不能重新赋值
+3.  通过 props 得到的任何数据都是只读的，函数组件内不能重新赋值
+
+### 5. React中创建组件的第二种方式 (组件)
+#### 1. 通过class关键字创建组件并传值
+
+```
+class Hello2 extends React.Component {
+  constructor(props) {
+    super(props)
+
+    // console.log(props)
+
+    }
+
+    render(){
+        return <div>
+          {/* 需求 */}
+          <h3>外界传递过来的数据是： {this.props.name} --- {this.props.age}</h3>
+        </div>
+    }
+  }
 
 
+ReactDOM.render(<div>
+  <Hello2 name="zs" age={20}></Hello>
+</div>, document.getElementById('app'))
+```
+
+- 在 constructor 中，如果想要访问 props 属性，不能直接使用 this.props， 而是需要在 constructor 的构造器参数列表中，显示的定义 props 参数来接收，才能正常使用;
+
+- 两种组件的`props`都是只读的不能修改数据，但是`class`关键字继承的`React.Component`组件里使用`this.setState()`方法修改数据(不推荐使用`箭头函数+this.state.属性名=值`的方式)
+
+#### 2. React的this.setState()和事件绑定机制
+
+- ，this.state 是固定写法，表示 当前组件实例的私有数据对象，就好比`vue` 中，组件实例身上的 `data(){ return {} }` 函数
+- 如果想要使用 组件中 `state` 上的数据，直接通过return中的 `this.state.***` 来访问
+- React绑定事件处理函数
+    + 事件处理函数直接定义在该组件中。
+    + 在React中，如果想要为元素绑定事件，不能使用网页中传统的 onclick 事件，而是需要使用`React`提供的`onClick`React提供的事件绑定机制，使用的都是驼峰命名，基本上，传统的JS 事件，都被`React`重新定义了一下，改成了驼峰命名`onMouseMove`。
+    + 在 React 提供的事件绑定机制中，事件的处理函数，必须直接给定一个 function，而不是给定一个 function 的名称，即使用箭头函数或者`function 函数名(){ ... }`
+    + 在为 React 事件绑定处理函数的时候，需要通过 this.函数名， 来把 函数的引用交给事件
+    + React 已经帮我们规定死了，在方法中，默认`this` 指向 `undefined`，并不是指向方法的调用者
+
+```
+class Hello2 extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      msg: '这是 Hello2 组件的私有msg数据',
+      info: '瓦塔西***'
+    }
+  }
+
+  render() {
+
+    return <div>
+      <h5>{this.state.msg}</h5>
+
+      <input type="button" value="修改 msg" id="btnChangeMsg" onClick={this.changeMsg} />
+
+      <br />
+
+    </div>
+  }
+
+  changeMsg = () => {
+   
+    // console.log(this) undefined
+
+    // this.state.msg = '123' // 不推荐这种方式
+
+    // 如果要为 this.state 上的数据重新赋值，那么，React 推荐使用 this.setState({配置对象}) 来重新为 state 赋值
+    // 注意： this.setState 方法，只会重新覆盖那些 显示定义的属性值，如果没有提供最全的属性，则没有提供的属性值，不会被覆盖；
+
+    this.setState({
+        msg:'123'
+        })  
+  }
+}
+```
