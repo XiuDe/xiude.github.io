@@ -221,3 +221,62 @@ class Hello2 extends React.Component {
   }
 }
 ```
+
+### 6. React中的this.setState()
+- `this.setState()`方法，只会重新覆盖显示定义的属性值，如果没有提供最全的属性，则没有提供的属性值，不会被覆盖；
+- `this.setState()`方法，是异步执行的；
+- `this.setState()`方法里面可以传递一个对象直接赋值，但也可以传递两个函数；
+- 在`this.setState()`方法，第一个 function 的参数中，支持传递两个参数，其中，第一个参数是 `prevState`，表示为修改之前的 老的 `state` 数据,第二个参数，是外界传递给当前组件的 `props` 数据。
+- 在`this.setState()`方法，第二个 function是回调函数，当第一个函数做完需求(如：修改完数据值)，回调函数可以做相应处理。
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom'
+
+class Hello2 extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            msg:'Hello2组件的数据'，
+            info:'xd'
+        }
+    }
+
+    render(){
+        return <div>
+           <h1>Hello2 组件</h1>
+           <h3>组件传递的数据为:{this.props.address}_{this.props.name}</h3>
+
+           <input type="button" value="修改msg" id="btnChangeMsg" onClick={this.changeMsg}
+        </div>
+    }
+
+    changeMsg=()=>{
+        this.setState(function(prevState,props){
+            return {
+                msg:'123' // 修改传入值
+            }
+            },function(){
+                console.log(this.state.msg);// 输出修改后的值
+          });
+    }
+}
+
+
+// 需要渲染的组件
+ReactDOM.render(<div>
+      <Hello2 address="YourHeart" name="zxd"></Hello2>
+    </div>,document.getElementById('app'));
+```
+
+### 7. React中的有状态组件和无状态组件
+#### 1. 有状态组件和无状态组件
+- 无状态组件：使用 function 构造函数创建的组件，内部没有 `state` 私有数据，只有 一个 props 来接收外界传递过来的数据，只可读不可写；
+- 有状态组件：使用 class 关键字创建的组件，内部除了有 `this.props` 这个只读属性之外，还有一个专门用于存放自己私有数据的 `this.state` 属性，这个 state 是可读可写的.
+
+#### 2. 有状态组件和无状态组件的本质区别
+- 最本质的区别就是：有无 state 属性；同时class 创建的组件，有自己的生命周期函数，但是，function 创建的 组件，没有自己的生命周期函数；
+
+#### 3. 选用有状态组件和无状态组件
+1. 如果一个组件需要存放自己的私有数据，或者需要在组件的不同阶段执行不同的业务逻辑，此时，非常适合用 class 创建出来的有状态组件；
+2. 如果一个组件，只需要根据外界传递过来的props，渲染固定的页面结构，此时，非常适合使用 function 创建出来的无状态组件；（使用无状态组件的好处： 由于剔除了组件的生命周期，所以，运行速度会相对快一点点）
