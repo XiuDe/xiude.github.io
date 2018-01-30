@@ -9,9 +9,13 @@ tag: react
 {:toc}
 
 关于基本的react的相关整理，主要是梳理一下react的知识体系react 16版本之后的变更，从项目角度整合知识框架。
-
 - [英文网官网](http://facebook.github.io/react/docs/getting-started.html)
 - [中文文档](http://www.react-cn.com/docs/getting-started.html)
+- 本篇文章主要总结
+    + `React.createElement()`
+    + `ReactDOM.render()`
+    + jsx语法糖
+    + 有状态组件和无状态组件
 
 <!-- more -->
 
