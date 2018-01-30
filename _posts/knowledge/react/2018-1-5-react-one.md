@@ -1,6 +1,6 @@
 ---
 layout: original
-title: "react相关整理一"
+title: "react概念整理"
 date: 2018-01-05 22:23:49 +0800 
 categories: 前端框架研究
 tag: react

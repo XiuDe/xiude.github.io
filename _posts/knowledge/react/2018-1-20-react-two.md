@@ -1,6 +1,6 @@
 ---
 layout: original
-title: "react学习笔记"
+title: "react项目总结一"
 date: 2018-01-20 22:23:49 +0800 
 categories: 前端框架研究
 tag: react
