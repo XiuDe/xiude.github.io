@@ -284,3 +284,13 @@ ReactDOM.render(<div>
 #### 3. 选用有状态组件和无状态组件
 1. 如果一个组件需要存放自己的私有数据，或者需要在组件的不同阶段执行不同的业务逻辑，此时，非常适合用 class 创建出来的有状态组件；
 2. 如果一个组件，只需要根据外界传递过来的props，渲染固定的页面结构，此时，非常适合使用 function 创建出来的无状态组件；（使用无状态组件的好处： 由于剔除了组件的生命周期，所以，运行速度会相对快一点点）
+
+### 8. 参考文章
++ [React数据流和组件间的沟通总结](http://www.cnblogs.com/tim100/p/6050514.html)
++ [单向数据流和双向绑定各有什么优缺点？](https://segmentfault.com/q/1010000005876655/a-1020000005876751)
++ [怎么更好的理解虚拟DOM?](https://www.zhihu.com/question/29504639?sort=created)
++ [React中文文档 - 版本较低](http://www.css88.com/react/index.html)
++ [React 源码剖析系列 － 不可思议的 react diff](http://blog.csdn.net/yczz/article/details/49886061)
++ [深入浅出React（四）：虚拟DOM Diff算法解析](http://www.infoq.com/cn/articles/react-dom-diff?from=timeline&isappinstalled=0)
++ [一看就懂的ReactJs入门教程（精华版）](http://www.cocoachina.com/webapp/20150721/12692.html)
++ [CSS Modules 用法教程](http://www.ruanyifeng.com/blog/2016/06/css_modules.html)
