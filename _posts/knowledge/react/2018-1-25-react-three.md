@@ -1,6 +1,6 @@
 ---
 layout: original
-title: "react项目总结三"
+title: "react项目总结二"
 date: 2018-01-25 20:00:00 +0800 
 categories: 前端框架研究
 tag: react
@@ -38,6 +38,7 @@ tag: react
 - 优化行内样式方式三：将样式对象抽取成独立的js文件
 
      ```
+
      // CommentList.js样式文件
      export default {
        titleStyle:{fontSize:16,color:'blue'},
@@ -55,22 +56,26 @@ tag: react
              <h3 style={inlineStyle.bodyStyle}>评论内容：{props.content}</h3>
          </div>
      }
+
      ```
 
 ### 2. React中启用css样式表文件的模块化
 - 启用css样式表文件模块化，首先修改webpack开发环境依赖配置的`.css模块`的modules及参数。
 
 ```
+
 module: {
     rules: [
       { test: /\.css$/, use: ['style-loader', 'css-loader?modules&localIdentName=[name]_[local]-[hash:5]'] }
     ]
   }
+
 ```
 
 - 将`.css`在子组件中引入，以对象的形式使用
 
      ```
+
      import React from 'react';
      
      import CommentStyle from '../../css/CommentItem/CommentItem.css'
@@ -85,8 +90,22 @@ module: {
              <h3 className={CommentStyle.body}>评论内容：{props.content}</h3>
          </div>
      }
+
      ```
 
 #### 1. React中css样式表模块化存在的问题
 - 当启用css模块化以后，'.css'样式文件中所有的类名，都是私有的，如果想要把类名设置成全局的一个类，可以把类名用`:global()`包裹起来。
 - 当使用`:global()`设置了全局的类样式之后，这个类不会被重命名，只有私有的类才会重命名为自定义+几位hash值形式。
+
+### 3. 组件的生命周期
+ + 概念：在组件创建、到加载到页面上运行、以及组件被销毁的过程中，总是伴随着各种各样的事件，这些在组件特定时期，触发的事件，统称为 组件的生命周期；
+ + 组件生命周期分为三部分：
+      - 组件创建阶段
+      - 组件运行阶段
+      - 组件销毁阶段
+
+#### 1. 组件创建阶段
+
+#### 2. 组件运行阶段
+
+#### 3. 组件销毁阶段
