@@ -9,9 +9,10 @@ tag: react
 {:toc}
 
 关于基本的react的相关整理，主要是梳理一下react的知识体系react 16版本之后的变更，从项目角度整合知识框架。
+
 - [英文网官网](http://facebook.github.io/react/docs/getting-started.html)
 - [中文文档](http://www.react-cn.com/docs/getting-started.html)
-- 
+
 <!-- more -->
 ### 1. 组件中引入样式
 #### 1. 外部样式
@@ -98,14 +99,32 @@ module: {
 - 当使用`:global()`设置了全局的类样式之后，这个类不会被重命名，只有私有的类才会重命名为自定义+几位hash值形式。
 
 ### 3. 组件的生命周期
- + 概念：在组件创建、到加载到页面上运行、以及组件被销毁的过程中，总是伴随着各种各样的事件，这些在组件特定时期，触发的事件，统称为 组件的生命周期；
- + 组件生命周期分为三部分：
++ 参考文章：
+     - [React Native 中组件的生命周期](http://www.race604.com/react-native-component-lifecycle/)
+     - [vue中的生命周期图](https://cn.vuejs.org/v2/guide/instance.html#生命周期图示)
++ 概念：在组件创建、到加载到页面上运行、以及组件被销毁的过程中，总是伴随着各种各样的事件，这些在组件特定时期，触发的事件，统称为 组件的生命周期；
++ 组件生命周期分为三部分：
       - 组件创建阶段
       - 组件运行阶段
       - 组件销毁阶段
 
 #### 1. 组件创建阶段
+> 特点：创建阶段的生命周期函数，在组件的一生中，只执行一次；
+
+- `componentWillMount`: 组件将要被挂载，此时还没有开始渲染虚拟DOM。
+- `render`：第一次开始渲染真正的虚拟DOM，当render执行完，内存中就有了完整的虚拟DOM了。
+- `componentDidMount`: 组件完成了挂载，此时，组件已经显示到了页面上，当这个方法执行完，组件就进入都了 运行中的状态。
 
 #### 2. 组件运行阶段
+> 特点：根据组件的state和props的改变，有选择性的触发0次或多次；
+
+- `componentWillReceiveProps`: 组件将要接收新属性，此时，只要这个方法被触发，就证明父组件为当前子组件传递了新的属性值；
+- `shouldComponentUpdate`: 组件是否需要被更新，此时，组件尚未被更新，但是，`state` 和 `props` 肯定是最新的
+- `componentWillUpdate`: 组件将要被更新，此时，尚未开始更新，内存中的虚拟DOM树还是旧的
+- `rende`r: 此时，又要重新根据最新的 `state` 和 `props` 重新渲染一棵内存中的 虚拟DOM树，当 `render` 调用完毕，内存中的旧DOM树，已经被新DOM树替换了！此时页面还是旧的
+- `componentDidUpdate`: 此时，页面又被重新渲染了，state 和 虚拟DOM 和 页面已经完全保持同步
 
 #### 3. 组件销毁阶段
+> 特点：组件一生只执行一次；
+
+- `componentWillUnmount`: 组件将要被卸载，此时组件还可以正常使用；
