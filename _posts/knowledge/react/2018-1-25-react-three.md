@@ -130,5 +130,77 @@ module: {
 - `componentWillUnmount`: 组件将要被卸载，此时组件还可以正常使用；
 
 #### 4. React中组件的生命周期
-![]({{'/styles/images/javascriptoo/prototype01.png'}})
+
 ![]({{'/styles/images/react/reacttable.png'}})
+
+### 4. 组件的属性
+#### 1. `defaultProps`设置组件默认属性值
+- 固定写法`static defaultProps = { pName:pValue}`
+- `render()`函数中引用`this.props.pName`
+- 根据需求如果外界没有传递属性值pValue是设置的默认属性值
+
+#### 2. 用`prop-types`对`props`进行属性值类型校验
+- 使用`prop-types`要安装第三方包`yarn add prop-types`并引入`import ReactTypes from 'prop-types'`。
+- 固定写法`static propTypes = { pName:固定写法}`。
+     + PropTypes.array
+     + PropTypes.bool
+     + PropTypes.func
+     + PropTypes.number
+     + PropTypes.object
+     + PropTypes.string
+     + PropTypes.symbol
+
+- 检验类型错误控制台会警告
+
+#### 3. `componentWillMount()`函数
+- 类似于vue的`creat()`函数
+- 在此函数内部会访问到 属性值、状态值、普通函数值，不能访问到页面元素，因为`render()`未执行
+
+#### 4. 代码示例
+
+```
+import React from 'react';
+// 第三方包prop-type 属性值校验
+import ReactTypes from 'prop-types';
+
+export default class Counter extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            msg:"ok"
+        }
+    }
+
+    static defaultProps = {
+        initCounter:0
+    }
+
+    // 属性校验
+    static propTypes = {
+        initCounter:ReactTypes.number
+
+    }
+
+    // 组件创建时 将要挂载函数
+    componentWillMount(){
+        console.log("属性值："+this.props.initCounter);
+        console.log("状态值："+this.state.msg);
+        console.log(this.myselfFunc());
+    }
+
+    render(){
+        return <div>
+            <h1>这是Counter组件</h1>
+            <input type="button" value="+1" />
+            <hr />
+            <p>当前Counter的值是：{this.props.initCounter}</p>
+        </div>
+    }
+
+    // 自定义函数
+    myselfFunc(){
+        console.log("自定义函数");
+    }
+}
+```
