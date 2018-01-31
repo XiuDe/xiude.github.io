@@ -130,5 +130,5 @@ module: {
 - `componentWillUnmount`: 组件将要被卸载，此时组件还可以正常使用；
 
 #### 4. React中组件的生命周期
-
-![React中组件的生命周期]({{'/styles/images/react/reacttable.png'}})
+![]({{'/styles/images/javascriptoo/prototype01.png'}})
+![]({{'/styles/images/react/reacttable.png'}})
