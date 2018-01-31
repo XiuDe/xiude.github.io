@@ -128,3 +128,7 @@ module: {
 > 特点：组件一生只执行一次；
 
 - `componentWillUnmount`: 组件将要被卸载，此时组件还可以正常使用；
+
+#### 4. React中组件的生命周期
+
+![React中组件的生命周期]({{'/styles/images/react/reacttable.png'}})
