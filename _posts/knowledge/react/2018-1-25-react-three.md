@@ -164,6 +164,16 @@ module: {
 - 类似于vue中的`mounted()`函数。
 - 能够访问到页面元素
 
+#### 6. `shouldComponentUpdate()`函数
+- 必须返回一个boolean值，返回true会继续执行后续生命周期函数页面更新，返回false则不执行页面不更新。
+- 参数nextProps和nextState，nextState表示最新的数据对象，而this.state拿到的是页面数据的旧值不是最新值。
+
+#### 7. `componentWillUpdate()`函数
+- 页面上的值都是旧的
+- 读取页面上的内容`this.refs.id名或标签名`
+
+#### 8. `componentDidUpdate()`函数
+- 页面上Dom、数据都是最新的，可以操作新的数据。
 
 #### 代码示例
 
