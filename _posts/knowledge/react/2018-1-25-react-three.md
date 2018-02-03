@@ -378,3 +378,67 @@ export default class TestThis extends React.Component{
 
 }
 ```
+
+### 6.React页面数据同步到state
+> react中没有双向数据绑定，不同于vue中的`v-model`。
+
+- 如果为表单元素提供value属性绑定，必须为表单元素绑定`readOnly`或者`onChange`事件。
+- 提供`readOnly`，表示这个元素只读不能被修改。
+- 提供`onChange`事件，表示这个值可以被修改，但是要自己定义修改的逻辑，可以实现页面数据同步state。
+- 拿到表单value值，并用`onChange`修改值得三种方式：
+    + 用原生`document.getElementById()`获取
+    + 用ref来拿
+    + 用事件的e来拿
+
+```
+import React from 'react';
+
+export default class TestThis extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state={
+            msg:"原始值"
+        }
+    }
+
+    render(){
+        return <div>
+            <h1>绑定this传参</h1>
+            <input type="button" value="This传参方式三" onClick={()=>{this.changeMsg3("参数3-1","参数3-2")}} />
+            <h3>{this.state.msg}</h3>
+            <hr />
+        {/*<input type="text" value={this.state.msg} ref="txt" readOnly/>*/}
+            <input type="text" value={this.state.msg} ref="txt" id="text" onChange={this.txtChange}/>
+        </div>
+    }
+    
+    // onChange事件从页面修改state值：有三种方式
+    txtChange=(e)=>{
+        // 方式一：用原生document.getElementById()获取
+        /*console.log(document.getElementById("text").value);
+        this.setState({
+            msg:document.getElementById("text").value
+        });*/
+        // 方式二：用ref来拿
+        /*console.log(this.refs.txt.value);
+        this.setState({
+            msg:this.refs.txt.value
+        });*/
+        // 方式三：用事件的e来拿
+        console.log(e.target.value)
+        this.setState({
+            msg:e.target.value
+        });
+
+    }
+
+    // 方式三
+    changeMsg3(arg1,arg2){
+        this.setState({
+            msg:arg1 + arg2
+        });
+    }
+
+}
+```
