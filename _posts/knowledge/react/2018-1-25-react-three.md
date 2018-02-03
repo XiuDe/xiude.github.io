@@ -133,6 +133,21 @@ module: {
 
 ![]({{'/styles/images/react/reacttable.png'}})
 
+#### 5. 组件生命周期的调用顺序
++ Mounting：
+ - constructor()
+ - componentWillMount()
+ - render()
+ - componentDidMount()
++ Updating：
+ - componentWillReceiveProps(nextProps)
+ - shouldComponentUpdate(nextProps, nextState)
+ - componentWillUpdate(nextProps, nextState)
+ - render()
+ - componentDidUpdate(prevProps, prevState)
++ Unmounting：
+ - componentWillUnmount()
+
 ### 4. 组件的属性
 #### 1. `defaultProps`设置组件默认属性值
 - 固定写法`static defaultProps = { pName:pValue}`
@@ -175,7 +190,7 @@ module: {
 #### 8. `componentDidUpdate()`函数
 - 页面上Dom、数据都是最新的，可以操作新的数据。
 
-#### 代码示例
+#### 9.代码示例
 
 ```
 import React from 'react';
@@ -187,7 +202,8 @@ export default class Counter extends React.Component{
         super(props);
 
         this.state = {
-            msg:"ok"
+            msg:"ok",
+            count: props.initCounter
         }
     }
 
@@ -211,15 +227,154 @@ export default class Counter extends React.Component{
     render(){
         return <div>
             <h1>这是Counter组件</h1>
-            <input type="button" value="+1" />
+            <input type="button" value="+1" id="btn" onClick={this.increment}/>
             <hr />
-            <p>当前Counter的值是：{this.props.initCounter}</p>
+            <h3 id="myh3">当前Counter的值是：{this.state.count}</h3>
         </div>
     }
+
+    /*react方式实现自增*/
+    increment=()=>{
+        this.setState({
+            count:this.state.count + 1  
+        });
+    }
+
+
+    componentDidMount(){
+        /*原生方法
+        console.log(document.getElementById("myh3"));
+        document.getElementById("btn").onclick=()=>{
+            console.log(this.state);
+            this.setState({
+                count:this.state.count + 1
+            })
+        }*/
+
+    }
+
+    // 组件运行阶段函数
+    shouldComponentUpdate(nextProps,nextState){
+        console.log(nextProps.count+" "+nextState.count);// undefined count的实际值
+        /*return nextState.count%2===0?true:false;*/
+        return true;
+    }
+    componentWillUpdate(){
+        /*console.log(document.getElementById("myh3").innerHTML);
+        // react写法
+        console.log(this.refs.myh3);*/
+    }
+    componentDidUpdate(){
+        /*console.log(this.refs.myh3);读取不到*/
+        console.log(document.getElementById("myh3").innerHTML);
+    }
+
+
 
     // 自定义函数
     myselfFunc(){
         console.log("自定义函数");
     }
+}
+```
+
+#### 10.`componentWillReceiveProps()`函数
+- 当子组件第一次渲染到页面上的时候，不会触发这个函数，当父组件传递的值相较第一次改变了，才会触发
+
+```
+import React from 'react';
+
+export default class Parent extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            msg:'父组件的msg'
+        }
+    }
+
+    render(){
+        return <div>
+            <h1>父组件</h1>
+            <input type="button" onClick={this.changeMsg} value="修改msg的值"/>
+            <hr />
+            <Son pmsg={this.state.msg}></Son>
+        </div>
+    }
+    // 自定义函数
+    changeMsg=()=>{
+        this.setState({
+            msg:"已修改的msg值"
+        });
+    }
+}
+
+class Son extends React.Component{
+    constructor(props){
+        super(props);
+    }
+
+    render(){
+        return <div>
+            <h3>子组件：{this.props.pmsg}</h3>
+        </div>
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log("props值已经被修改了");
+        console.log("props的最新值为:"+nextProps.pmsg);
+    }
+}
+```
+
+### 5.React中绑定this传参
+- 事件中直接用bind绑定要修改参数的函数。
+- 在构造函数区域绑定this，用bind的返回值。
+- 在事件上使用箭头函数包裹要执行的修改参数的函数。
+
+```
+import React from 'react';
+
+export default class TestThis extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state={
+            msg:"原始值"
+        }
+        this.changeMsg2 = this.changeMsg2.bind(this,"参数2-1","参数2-2");
+    }
+
+    render(){
+        return <div>
+            <h1>绑定this传参</h1>
+            <hr />
+            <input type="button" value="This传参方式一" onClick={this.changeMsg1.bind(this,"参数1-1","参数1-2")} />
+            <hr />
+            <input type="button" value="This传参方式二" onClick={this.changeMsg2} />
+            <hr />
+            <input type="button" value="This传参方式三" onClick={()=>{this.changeMsg3("参数3-1","参数3-2")}} />
+            <h3>{this.state.msg}</h3>
+        </div>
+    }
+
+    // 方式一
+    changeMsg1(arg1,arg2){
+        this.setState({
+            msg:arg1 + arg2
+        });
+    }
+    // 方式二
+    changeMsg2(arg1,arg2){
+        this.setState({
+            msg:arg1 + arg2
+        });
+    }
+    // 方式三
+    changeMsg3(arg1,arg2){
+        this.setState({
+            msg:arg1 + arg2
+        });
+    }
+
 }
 ```
