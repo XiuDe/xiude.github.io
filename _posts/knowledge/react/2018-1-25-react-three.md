@@ -442,3 +442,7 @@ export default class TestThis extends React.Component{
 
 }
 ```
+
+### 7.react中父组件向子组件传递方法
+- react中，只要是传递给子组件数据，不管是普通的类型，还是方法，都可以使用this.props来调用。
+- Vue，父组件传递给子组件的普通属性和方法属性，区别对待，普通属性用props接收，方法使用`this.$emit("方法名")`
