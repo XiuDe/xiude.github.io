@@ -529,3 +529,66 @@ class Com3 extends React.Component{
 }
 ```
 
+### 9. react中的路由
+#### 1. `react-router-dom`的基本使用
+- [安装第三方包](https://reacttraining.com/react-router/web/guides/quick-start)
+- 按需导入`import {HashRouter,Route,Link} from 'react-router-dom'`
+     + `HashRouter`表示路由根容器，所有跟路由相关的东西都由`HashRouter`包裹，一个网站中只需要使用一次`HashRouter`。
+     + `Route`表示路由规则，两个比较重要的属性`path`和`component`；也表示站位符，将匹配到的组件放到这个位置。
+     + `Link`表示一个路由链接
+     
+- 当使用`<HashRouter></HashRouter>`把根组件包裹，这样就启用路由了，`<HashRouter></HashRouter>`内部只能使用一个根节点。
+
+#### 2. 代码示例
+```
+// 入口js文件
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+// 启用路由组件
+import App from './components/router/Router.jsx';
+
+
+ReactDOM.render(<App> 
+  
+</App>, document.getElementById('app'));
+
+
+// 路由文件
+import React from 'react';
+
+import {HashRouter,Route,Link} from 'react-router-dom';
+
+import Home from './app/Home.jsx';
+import Movies from './app/Movies.jsx';
+import About from './app/About.jsx';
+
+export default class router extends React.Component{
+    constructor(props){
+        super(props);
+
+    }
+
+    render(){
+        return <HashRouter>
+            <div>
+                <h1>这是一个路由组件</h1>
+                <hr />
+                <Link to='/home'>首页</Link>&nbsp;&nbsp;
+                <Link to='/movie'>电影</Link>&nbsp;&nbsp;
+                <Link to='/about'>关于</Link>
+                <hr />
+                <Route path='/home' component={Home}></Route>
+                <Route path='/movie' component={Movies}></Route>
+                <Route path='/about' component={About}></Route>
+            </div>
+        </HashRouter>
+    }
+} 
+
+```
+
+
+### 10. 参考文章
+[类型校验](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
+[Animation Add-Ons](https://reactjs.org/docs/animation.html#high-level-api-reactcsstransitiongroup)
