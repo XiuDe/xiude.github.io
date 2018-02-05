@@ -446,3 +446,86 @@ export default class TestThis extends React.Component{
 ### 7.react中父组件向子组件传递方法
 - react中，只要是传递给子组件数据，不管是普通的类型，还是方法，都可以使用this.props来调用。
 - Vue，父组件传递给子组件的普通属性和方法属性，区别对待，普通属性用props接收，方法使用`this.$emit("方法名")`
+
+### 8.父组件使用context特性为子组件传递数据
+- 传统方式，由父组件一级一级往子孙组件传递。context方式，在父组件中共享一个context对象，不用逐层传递数据。
+
+1. 父组件使用`getChildContext()`方法返回一个对象
+2. 父组件启用属性检验(引入`prop-types`包)，传递的每个属性数据都需要校验，用静态属性`static childContextTypes={}`
+3. 子组件使用数据，首先进行属性校验(如果子组件在单独的文件中也需要引入`prop-types`包)，要用静态的属性`static contextTypes={}`
+4. 使用数据用`this.context.数据名`
+5. 以上`getChildContext()`、`static childContextTypes={}`和`static contextTypes={}`都是固定写法。
+
+```
+import React from 'react';
+
+import ReactTypes from 'prop-types';
+
+export default class Com1 extends React.Component{
+    constructor(props){
+        super(props)
+
+        this.state={
+            color:'red'
+        }
+    }
+
+
+    render(){
+        return <div>
+            <h1>这是父组件</h1>
+            <Com2></Com2>
+        </div>
+    }
+    
+    // 需要给子孙组件传递的数据
+    getChildContext(){
+        return {
+            color:this.state.color
+        }
+    }
+    // 启用属性校验
+    static childContextTypes = {
+        color:ReactTypes.string
+    }
+
+
+}
+
+
+
+class Com2 extends React.Component{
+    constructor(props){
+        super(props)
+    }
+
+
+    render(){
+        return <div>
+            <h3>这是子组件</h3>
+            <Com3></Com3>
+        </div>
+    }
+}
+
+
+class Com3 extends React.Component{
+    constructor(props){
+        super(props)
+    }
+
+
+
+    // 首先启用属性校验
+    static contextTypes = {
+        color:ReactTypes.string
+    }
+
+    render(){
+        return <div>
+            <h5 style={{color:this.context.color}}>这是孙子组件</h5>
+        </div>
+    }
+}
+```
+
