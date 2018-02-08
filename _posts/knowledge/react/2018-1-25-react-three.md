@@ -539,6 +539,11 @@ class Com3 extends React.Component{
      
 - 当使用`<HashRouter></HashRouter>`把根组件包裹，这样就启用路由了，`<HashRouter></HashRouter>`内部只能使用一个根节点。
 
+#### 2. react匹配路由参数
+- 默认情况下，路由中的规则是模糊匹配的，精确匹配，要设置`<Route></Route>`参数exact，并设置component中的相应属性`:type/:id`
+- 在子组件中获取路由参数`this.props.params.match.type`或`this.props.params.match.id`(也可以在子组件中简写给state赋值新的参数)。
+
+
 #### 2. 代码示例
 ```
 // 入口js文件
@@ -575,17 +580,37 @@ export default class router extends React.Component{
                 <h1>这是一个路由组件</h1>
                 <hr />
                 <Link to='/home'>首页</Link>&nbsp;&nbsp;
-                <Link to='/movie'>电影</Link>&nbsp;&nbsp;
+                <Link to='/movie/top250/10'>电影</Link>&nbsp;&nbsp;
                 <Link to='/about'>关于</Link>
                 <hr />
                 <Route path='/home' component={Home}></Route>
-                <Route path='/movie' component={Movies}></Route>
+                <Route exact path='/movie/:type/:id' component={Movies}></Route>
                 <Route path='/about' component={About}></Route>
             </div>
         </HashRouter>
     }
 } 
 
+
+// 路由movie的跳转文件
+import React from 'react';
+
+export default class Movies extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            routeParams:props.match.params
+        }
+    }
+
+    render(){
+        return <div>
+            <h3>电影:{this.props.match.params.type}--{this.props.match.params.id}</h3>
+            <h5>电影:{this.state.routeParams.type}--{this.state.routeParams.id}</h5>
+        </div>
+    }
+}
 ```
 
 
